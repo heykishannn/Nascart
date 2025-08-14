@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LANGUAGE DICTIONARY ---
     const translations = {
-        en: { settings: 'Settings', darkMode: 'Dark Mode', language: 'Language', todaysDeals: "Today's Deals", searchPlaceholder: 'Search for anything...', categories: 'Categories', forYou: 'Specials For You', reviews: 'Reviews & Ratings', suggestions: 'You might also like', buyNow: 'Buy Now', about: 'About Nascart', aboutText: 'Your smart shopping assistant, bringing you handpicked collections and unbeatable deals from top online stores.', otherPlatforms: 'Other Platforms', poweredBy: 'Powered by', privacyPolicy: 'Privacy Policy' },
-        hi: { settings: 'सेटिंग्स', darkMode: 'डार्क मोड', language: 'भाषा', todaysDeals: 'आज के सौदे', searchPlaceholder: 'कुछ भी खोजें...', categories: 'श्रेणियाँ', forYou: 'आपके लिए कुछ खास', reviews: 'समीक्षा और रेटिंग', suggestions: 'आपको यह भी पसंद आ सकता है', buyNow: 'अभी खरीदें', about: 'Nascart के बारे में', aboutText: 'आपका स्मार्ट शॉपिंग सहायक, जो आपको शीर्ष ऑनलाइन स्टोर से चुनिंदा संग्रह और शानदार डील प्रदान करता है।', otherPlatforms: 'अन्य प्लेटफॉर्म', poweredBy: 'द्वारा संचालित', privacyPolicy: 'गोपनीयता नीति' }
+        en: { settings: 'Settings', darkMode: 'Dark Mode', language: 'Language', todaysDeals: "Today's Deals", searchPlaceholder: 'Search for anything...', categories: 'Categories', forYou: 'Specials For You', reviews: 'Reviews & Ratings', suggestions: 'You might also like', buyNow: 'Buy Now', about: 'About Nascart', aboutText: 'Your smart shopping assistant, bringing you handpicked collections and unbeatable deals from top online stores.', otherPlatforms: 'Other Platforms', poweredBy: 'Powered by', privacyPolicy: 'Privacy Policy', lastUpdated: 'Last updated:', privacyIntro: 'Welcome to Nascart. We are committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our application.', privacyL1: '1. Information We Collect (Locally)', privacyP1: "Nascart is designed with your privacy in mind. We do not collect or store any of your personal data on our servers. All data collection happens and stays on your own device in your browser's IndexedDB. We have no access to this information.", privacyL2: '2. How We Use Information', privacyP2: 'The locally stored data is used exclusively to enhance your user experience by tailoring content and product recommendations to your interests.', privacyL3: '3. Third-Party Links & Affiliates', privacyP3: 'Nascart is an affiliate marketing application. When you click on a "Buy Now" link, you will be redirected to a third-party e-commerce website (e.g., Amazon, Flipkart). This Privacy Policy does not apply to these external sites.' },
+        hi: { settings: 'सेटिंग्स', darkMode: 'डार्क मोड', language: 'भाषा', todaysDeals: 'आज के सौदे', searchPlaceholder: 'कुछ भी खोजें...', categories: 'श्रेणियाँ', forYou: 'आपके लिए कुछ खास', reviews: 'समीक्षा और रेटिंग', suggestions: 'आपको यह भी पसंद आ सकता है', buyNow: 'अभी खरीदें', about: 'Nascart के बारे में', aboutText: 'आपका स्मार्ट शॉपिंग सहायक, जो आपको शीर्ष ऑनलाइन स्टोर से चुनिंदा संग्रह और शानदार डील प्रदान करता है।', otherPlatforms: 'अन्य प्लेटफॉर्म', poweredBy: 'द्वारा संचालित', privacyPolicy: 'गोपनीयता नीति', lastUpdated: 'अंतिम अपडेट:', privacyIntro: 'Nascart में आपका स्वागत है। हम आपकी गोपनीयता की रक्षा के लिए प्रतिबद्ध हैं...', privacyL1: '1. हम कौन सी जानकारी एकत्र करते हैं (स्थानीय रूप से)', privacyP1: 'Nascart को आपकी गोपनीयता को ध्यान में रखकर बनाया गया है...', privacyL2: '2. हम जानकारी का उपयोग कैसे करते हैं', privacyP2: 'स्थानीय रूप से संग्रहीत डेटा का उपयोग विशेष रूप से आपके उपयोगकर्ता अनुभव को बढ़ाने के लिए किया जाता है...', privacyL3: '3. तृतीय-पक्ष लिंक और सहयोगी', privacyP3: 'Nascart एक एफिलिएट मार्केटिंग एप्लिकेशन है...' }
     };
     
     let db;
@@ -123,26 +123,43 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('product-page-description').innerHTML = product.description ? product.description.replace(/\n/g, '<br>') : 'No description available.';
         document.getElementById('product-page-buy-btn').href = product.affiliate_link || '#';
         const sliderWrapper = document.getElementById('image-slider-wrapper');
-        sliderWrapper.innerHTML = product.images.map(img => `<img src="${img}" alt="${product.name}" class="slider-image">`).join('');
+        sliderWrapper.innerHTML = product.images.map(img => `<div class="slider-image-container"><img src="${img}" alt="${product.name}" class="slider-image"></div>`).join('');
         document.getElementById('product-thumbnails').innerHTML = product.images.map((img, index) => `<img src="${img}" alt="Thumbnail ${index+1}" class="${index === 0 ? 'active' : ''}" onclick="updateSliderFromThumbnail(${index})">`).join('');
-        setupImageSlider();
+        setupImageSliderAndZoom();
         renderFakeReviews();
     }
     function renderFakeReviews() { const reviewsContainer = document.getElementById('fake-reviews-container'); const reviews = [{ name: "Aarav Sharma", rating: 5, comment: "Absolutely fantastic! The quality is top-notch." }, { name: "Diya Patel", rating: 4, comment: "Good value for money. It does the job well." }, { name: "Rohan Gupta", rating: 5, comment: "Super fast delivery and a great product!" }]; reviewsContainer.innerHTML = reviews.map(r => `<div class="review-card"><div class="review-header"><strong>${r.name}</strong><span class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span></div><p>${r.comment}</p></div>`).join(''); }
     function initBannerSlider(slideCount) { if (slideCount <= 1) return; let currentSlide = 0; setInterval(() => { currentSlide = (currentSlide + 1) % slideCount; document.getElementById('banner-wrapper').style.transform = `translateX(-${currentSlide * 100}%)`; }, 4000); }
     
-    function setupImageSlider() {
+    function setupImageSliderAndZoom() {
         const wrapper = document.getElementById('image-slider-wrapper');
-        let isDown = false, startX, scrollLeft, currentIndex = 0;
-        const imageCount = wrapper.children.length; if (imageCount <= 1) return;
-        const updateThumbnails = (index) => { currentIndex = index; document.querySelectorAll('.thumbnails img').forEach((t, i) => t.classList.toggle('active', i === index));};
-        const snapToImage = () => { currentIndex = Math.round(wrapper.scrollLeft / wrapper.offsetWidth); wrapper.scrollTo({ left: wrapper.offsetWidth * currentIndex, behavior: 'smooth' }); updateThumbnails(currentIndex); };
-        wrapper.addEventListener('mousedown', (e) => { isDown = true; wrapper.style.cursor = 'grabbing'; startX = e.pageX - wrapper.offsetLeft; scrollLeft = wrapper.scrollLeft; });
-        wrapper.addEventListener('mouseleave', () => { if(isDown) snapToImage(); isDown = false; wrapper.style.cursor = 'grab'; });
-        wrapper.addEventListener('mouseup', () => { if(isDown) snapToImage(); isDown = false; wrapper.style.cursor = 'grab'; });
-        wrapper.addEventListener('mousemove', (e) => { if (!isDown) return; e.preventDefault(); const x = e.pageX - wrapper.offsetLeft; const walk = (x - startX) * 2; wrapper.scrollLeft = scrollLeft - walk; });
+        const slides = wrapper.querySelectorAll('.slider-image-container');
+        const prevBtn = document.getElementById('prev-image-btn');
+        const nextBtn = document.getElementById('next-image-btn');
+        let currentIndex = 0;
+
+        const goToSlide = (index) => {
+            wrapper.style.transform = `translateX(-${index * 100}%)`;
+            document.querySelectorAll('.thumbnails img').forEach((t, i) => t.classList.toggle('active', i === index));
+            currentIndex = index;
+        };
+
+        prevBtn.onclick = () => goToSlide(currentIndex > 0 ? currentIndex - 1 : slides.length - 1);
+        nextBtn.onclick = () => goToSlide(currentIndex < slides.length - 1 ? currentIndex + 1 : 0);
+
+        window.updateSliderFromThumbnail = (index) => goToSlide(index);
+        
+        slides.forEach(slide => {
+            const img = slide.querySelector('.slider-image');
+            let scale = 1, panning = false, pointX = 0, pointY = 0, start = { x: 0, y: 0 };
+            const setTransform = () => { img.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`; }
+            img.addEventListener('mousedown', e => { if (scale > 1) { e.preventDefault(); panning = true; start = { x: e.clientX - pointX, y: e.clientY - pointY }; } });
+            img.addEventListener('mouseup', () => { panning = false; });
+            img.addEventListener('mousemove', e => { if (!panning) return; e.preventDefault(); pointX = (e.clientX - start.x); pointY = (e.clientY - start.y); setTransform(); });
+            img.addEventListener('wheel', e => { e.preventDefault(); const xs = (e.clientX - img.offsetLeft - pointX) / scale, ys = (e.clientY - img.offsetTop - pointY) / scale; const delta = -e.deltaY; (delta > 0) ? (scale *= 1.2) : (scale /= 1.2); scale = Math.min(Math.max(1, scale), 4); pointX = e.clientX - img.offsetLeft - xs * scale; pointY = e.clientY - img.offsetTop - ys * scale; if (scale === 1) { pointX = 0; pointY = 0; } setTransform(); });
+            img.addEventListener('dblclick', () => { scale = scale > 1 ? 1 : 2; pointX = 0; pointY = 0; setTransform(); });
+        });
     }
-    window.updateSliderFromThumbnail = (index) => { const wrapper = document.getElementById('image-slider-wrapper'); wrapper.scrollTo({ left: wrapper.offsetWidth * index, behavior: 'smooth' }); document.querySelectorAll('.thumbnails img').forEach((t, i) => t.classList.toggle('active', i === index)); };
 
     function setupEventListeners() {
         menuBtn.addEventListener('click', openNav);
