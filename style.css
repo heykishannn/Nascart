@@ -43,9 +43,13 @@ h2 { font-weight: 600; margin-top: 40px; margin-bottom: 20px; }
 .product-name { font-weight: 500; margin: 0 0 auto; font-size: 0.9em; line-height: 1.4; height: 2.8em; overflow: hidden; }
 .product-price { font-size: 1.1em; color: var(--price-color); font-weight: 700; margin-top: 8px; }
 .product-page-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
-.main-image-container { position: relative; overflow: hidden; border-radius: 12px; box-shadow: var(--shadow); aspect-ratio: 1/1; touch-action: pan-y; }
+.main-image-container { position: relative; overflow: hidden; border-radius: 12px; box-shadow: var(--shadow); aspect-ratio: 1/1; touch-action: none; }
 .image-slider-wrapper { display: flex; height: 100%; transition: transform 0.4s ease; cursor: grab; }
-.slider-image { min-width: 100%; height: 100%; object-fit: contain; } /* FIX: Changed to contain */
+.slider-image-container { min-width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+.slider-image { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s ease; }
+.slider-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.4); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.5rem; cursor: pointer; z-index: 10; opacity: 0; transition: opacity 0.3s; }
+.main-image-container:hover .slider-nav-btn { opacity: 1; }
+.slider-nav-btn.prev { left: 10px; } .slider-nav-btn.next { right: 10px; }
 .thumbnails { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; justify-content: center; }
 .thumbnails img { width: 50px; height: 50px; border-radius: 8px; cursor: pointer; opacity: 0.6; transition: all 0.3s; border: 2px solid transparent; object-fit: cover; }
 .thumbnails img.active { opacity: 1; border-color: var(--primary-color); }
