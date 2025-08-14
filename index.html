@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Nascart - Discover Your Style</title>
-    <meta name="description" content="Nascart offers curated deals on a wide range of products. Shop smart, shop style.">
+    <meta name="description" content="Nascart is your smart shopping assistant, bringing you handpicked collections and unbeatable deals from the biggest online stores. Discover trends, save money, and find exactly what you're looking for.">
+    <meta name="keywords" content="Nascart, affiliate marketing, online shopping, deals, fashion, electronics, curated products">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,27 +15,84 @@
 <body class="light">
 
     <header class="header">
-        <div id="menu-btn" class="menu-icon">&#9776;</div>
+        <div id="back-btn" class="back-icon" title="Go Back">&#8592;</div>
+        <div id="menu-btn" class="menu-icon" title="Open Menu">&#9776;</div>
         <a href="#home" class="logo">Nascart</a>
-        <div class="header-placeholder"></div>
+        <div class="header-decoration">
+            <i class="fas fa-tags"></i>
+            <span data-lang-key="todaysDeals">Today's Deals</span>
+        </div>
     </header>
 
     <div id="side-panel" class="side-panel">
         <a href="javascript:void(0)" id="close-btn" class="close-btn">&times;</a>
         <div class="side-panel-content">
-            <h2>Settings</h2><hr>
+            <h2 data-lang-key="settings">Settings</h2><hr>
+            <div class="settings-item"><span data-lang-key="darkMode">Dark Mode</span><label class="switch"><input type="checkbox" id="theme-toggle"><span class="slider"></span></label></div>
             <div class="settings-item">
-                <span>Dark Mode</span>
-                <label class="switch"><input type="checkbox" id="theme-toggle"><span class="slider"></span></label>
+                <span data-lang-key="language">Language</span>
+                <select id="language-selector" aria-label="Select Language">
+                    <option value="en">English</option>
+                    <option value="hi">हिन्दी</option>
+                </select>
             </div>
-            <div class="settings-item"><a href="#" id="clear-data-btn">Clear Browsing Data</a></div>
-            <div class="settings-item"><a href="mailto:support@nascart.com" id="contact-us-link">Contact Us</a></div>
         </div>
     </div>
 
     <main>
         <div id="main-view" class="view">
-            <section class="home-search-section">
+            <section class="home-search-section"><input type="text" id="home-search-input" data-lang-placeholder="searchPlaceholder" aria-label="Search for products"><div id="live-search-results"></div></section>
+            <div id="banner-container"></div>
+            <div id="categories-container"></div>
+            <div id="products-container"></div>
+            <section id="privacy-section" class="privacy-section">
+                <h2 data-lang-key="privacyPolicy">Privacy Policy</h2>
+                <p><strong data-lang-key="lastUpdated">Last updated:</strong> August 15, 2025</p>
+                <p data-lang-key="privacyIntro">Welcome to Nascart. We are committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our application.</p>
+                <h4 data-lang-key="privacyL1">1. Information We Collect (Locally)</h4>
+                <p data-lang-key="privacyP1">Nascart is designed with your privacy in mind. We do not collect or store any of your personal data on our servers. All data collection happens and stays on your own device in your browser's IndexedDB. We have no access to this information.</p>
+                <h4 data-lang-key="privacyL2">2. How We Use Information</h4>
+                <p data-lang-key="privacyP2">The locally stored data is used exclusively to enhance your user experience by tailoring content and product recommendations to your interests.</p>
+                <h4 data-lang-key="privacyL3">3. Third-Party Links & Affiliates</h4>
+                <p data-lang-key="privacyP3">Nascart is an affiliate marketing application. When you click on a "Buy Now" link, you will be redirected to a third-party e-commerce website (e.g., Amazon, Flipkart). This Privacy Policy does not apply to these external sites.</p>
+            </section>
+        </div>
+
+        <div id="category-page-view" class="view">
+            <h2 id="category-page-title"></h2>
+            <div id="category-product-grid" class="product-grid"></div>
+        </div>
+
+        <div id="product-page-view" class="view">
+            <div class="product-page-grid">
+                <div class="product-gallery">
+                    <div id="main-image-container" class="main-image-container">
+                        <div id="image-slider-wrapper" class="image-slider-wrapper"></div>
+                    </div>
+                    <div id="product-thumbnails" class="thumbnails"></div>
+                </div>
+                <div class="product-details">
+                    <h1 id="product-page-title"></h1><p id="product-page-price"></p><p id="product-page-description"></p>
+                    <a id="product-page-buy-btn" href="#" target="_blank" class="buy-now-btn" data-lang-key="buyNow">Buy Now</a>
+                </div>
+            </div>
+            <div class="reviews-section"><h3 data-lang-key="reviews">Reviews & Ratings</h3><div id="fake-reviews-container"></div></div>
+            <div class="suggestions-section"><h3 data-lang-key="suggestions">You might also like</h3><div id="suggestions-grid" class="suggestions-grid"></div></div>
+        </div>
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-content">
+            <div class="footer-column about-column"><h4 data-lang-key="about">About Nascart</h4><p data-lang-key="aboutText">Your smart shopping assistant, bringing you handpicked collections and unbeatable deals from top online stores.</p></div>
+            <div class="footer-column platforms-column"><h4 data-lang-key="otherPlatforms">Other Platforms</h4><div class="platform-icons"><a href="https://nastoolss.blogspot.com/?m=1" target="_blank" title="NasTools"><i class="fas fa-tools"></i></a><a href="https://heykishannn.github.io/Festival/" target="_blank" title="Festival Wishes"><i class="fas fa-star"></i></a></div></div>
+        </div>
+        <div class="footer-bottom"><span data-lang-key="poweredBy">Powered by</span> <a href="https://heykishannn.github.io/.com/" target="_blank" class="nas-link">nas</a></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>            <section class="home-search-section">
                 <input type="text" id="home-search-input" placeholder="Search for anything...">
                 <div id="live-search-results"></div>
             </section>
@@ -45,7 +103,6 @@
 
             <section id="privacy-section" class="privacy-section">
                 <h2>Privacy Policy</h2>
-                <p><strong>Last updated: August 15, 2025</strong></p>
                 <p>Welcome to Nascart. We are committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our application.</p>
                 <h4>1. Information We Collect (Locally)</h4>
                 <p>Nascart is designed with your privacy in mind. We do not collect or store any of your personal data on our servers. All data collection happens and stays on your own device in your browser's IndexedDB. We have no access to this information.</p>
