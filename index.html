@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nascart - Discover Your Style</title>
+    <meta name="description" content="Nascart offers curated deals on a wide range of products. Shop smart, shop style.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body class="light">
+
+    <header class="header">
+        <div id="menu-btn" class="menu-icon">&#9776;</div>
+        <a href="#home" class="logo">Nascart</a>
+        <div class="header-placeholder"></div>
+    </header>
+
+    <div id="side-panel" class="side-panel">
+        <a href="javascript:void(0)" id="close-btn" class="close-btn">&times;</a>
+        <div class="side-panel-content">
+            <h2>Settings</h2><hr>
+            <div class="settings-item">
+                <span>Dark Mode</span>
+                <label class="switch"><input type="checkbox" id="theme-toggle"><span class="slider"></span></label>
+            </div>
+            <div class="settings-item"><a href="#" id="clear-data-btn">Clear Browsing Data</a></div>
+            <div class="settings-item"><a href="mailto:support@nascart.com" id="contact-us-link">Contact Us</a></div>
+        </div>
+    </div>
+
+    <main>
+        <div id="main-view" class="view">
+            <section class="home-search-section">
+                <input type="text" id="home-search-input" placeholder="Search for anything...">
+                <div id="live-search-results"></div>
+            </section>
+            
+            <div id="banner-container"></div>
+            <div id="categories-container"></div>
+            <div id="products-container"></div>
+
+            <section id="privacy-section" class="privacy-section">
+                <h2>Privacy Policy</h2>
+                <p><strong>Last updated: August 15, 2025</strong></p>
+                <p>Welcome to Nascart. We are committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our application.</p>
+                <h4>1. Information We Collect (Locally)</h4>
+                <p>Nascart is designed with your privacy in mind. We do not collect or store any of your personal data on our servers. All data collection happens and stays on your own device in your browser's IndexedDB. We have no access to this information.</p>
+                <h4>2. Third-Party Links & Affiliates</h4>
+                <p>Nascart is an affiliate marketing application. When you click on a "Buy Now" link, you will be redirected to a third-party e-commerce website (e.g., Amazon, Flipkart). This Privacy Policy does not apply to these external sites.</p>
+            </section>
+        </div>
+
+        <div id="product-page-view" class="view">
+            <a href="#home" class="back-button">&larr; Back to all products</a>
+            <div class="product-page-grid">
+                <div class="product-gallery">
+                    <div class="main-image"><img id="main-product-image" src="" alt="Main product view"></div>
+                    <div id="product-thumbnails" class="thumbnails"></div>
+                </div>
+                <div class="product-details">
+                    <h1 id="product-page-title"></h1>
+                    <p id="product-page-price" class="product-page-price"></p>
+                    <p id="product-page-description"></p>
+                    <a id="product-page-buy-btn" href="#" target="_blank" class="buy-now-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="reviews-section"><h3>Reviews & Ratings</h3><div id="fake-reviews-container"></div></div>
+            <div class="suggestions-section"><h3>You might also like</h3><div id="suggestions-grid" class="suggestions-grid"></div></div>
+        </div>
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-content">
+            <div class="footer-column about-column">
+                <h4>About Nascart</h4>
+                <p>Your smart shopping assistant, bringing you handpicked collections and unbeatable deals from top online stores. Discover trends, save money, and find your style.</p>
+            </div>
+            <div class="footer-column platforms-column">
+                <h4>Other Platforms</h4>
+                <div class="platform-icons">
+                    <a href="https://nastoolss.blogspot.com/?m=1" target="_blank" title="NasTools"><i class="fas fa-tools"></i></a>
+                    <a href="https://heykishannn.github.io/Festival/" target="_blank" title="Festival Wishes"><i class="fas fa-star"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Powered by <a href="https://heykishannn.github.io/.com/" target="_blank" class="nas-link">nas</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>
